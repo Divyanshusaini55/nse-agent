@@ -78,7 +78,6 @@ In addition to trap avoidance, the agent prioritizes retail investor empowerment
 ├── brief_SRVCABLE.md               # Gold-standard 1-page research brief for test case
 ├── brief_POLYCAB.md                # Bonus real-world brief for Polycab India Ltd
 ├── TEST_LOG.md                     # Comprehensive log of 3 iterative test runs
-├── DEMO_SCRIPT.md                  # Word-for-word teleprompter script for Loom video
 ├── web_app.py                      # Sleek, minimal light-theme visual dashboard
 ├── verify_pack.py                  # Automated test & integrity verification script
 ├── README.md                       # Project documentation & architecture overview
@@ -145,5 +144,4 @@ python verify_pack.py
 ---
 
 ## Screen Recording Walkthrough
-A concise 2–3 minute Loom video demonstrating the live CLI execution, walkthrough of the 4 traps, one key design decision (deterministic full-context XML sandboxing over chunked RAG), and one limitation (reliance on scraped document coverage).  
-*(See [DEMO_SCRIPT.md](file:///Users/divyanshu/Downloads/nse_agent/DEMO_SCRIPT.md) for the exact script).*
+A concise 2–3 minute video presentation demonstrating the live CLI execution, walkthrough of the 4 traps, one key design decision (deterministic full-context XML sandboxing over chunked RAG), and one limitation (reliance on scraped document coverage).
