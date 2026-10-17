@@ -93,8 +93,8 @@ In addition to trap avoidance, the agent prioritizes retail investor empowerment
 ### 1. Set Up Environment
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/forensic-nse-agent.git
-cd forensic-nse-agent
+git clone https://github.com/Divyanshusaini55/nse-agent.git
+cd nse-agent
 
 # Create and activate Python virtual environment
 python3 -m venv .venv
