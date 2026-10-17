@@ -1,66 +1,91 @@
-# 🎙️ Loom Video Presentation: Teleprompter Script (2–3 Minutes)
+# 🎙️ Video Presentation Teleprompter Script (2–3 Minutes)
 **Super Investing · AI Innovator Assignment · Part B**  
-**Role:** Senior AI Engineer / Candidate  
-**Target Duration:** 2 minutes 45 seconds  
+**Focus:** Forensic Indian Equity Research Agent  
+**Target Duration:** ~2 minutes 45 seconds  
+**Tone:** Technical, conversational, and grounded in retail investor empathy
 
 ---
 
-## ⏱️ Video Timeline Overview
-- **0:00 – 0:30:** Introduction & The Problem (Why standard summarizers fail retail investors)
-- **0:30 – 1:15:** Architecture & Live Execution (XML sandboxing + regex scanning + Gemini 2.5 Flash)
-- **1:15 – 2:05:** One Design Decision I'm Proud Of (Deterministic Full-Context Sandboxing vs. Chunked Vector RAG)
-- **2:05 – 2:35:** One Limitation & Real-World Mitigation (Scraped Pack Incompleteness & Regulatory Access)
-- **2:35 – 2:45:** Conclusion & Handover
+## ⏱️ Video Pacing & Visual Timeline
+
+| Timestamp | Segment | Visual / On-Screen Focus |
+| :--- | :--- | :--- |
+| **0:00 – 0:35** | **The Engineering Challenge & Human Stakes** | Face to camera / Dashboard at `localhost:8080` |
+| **0:35 – 1:20** | **Live Terminal Run & Neutralizing the Traps** | Terminal running `python agent.py --ticker SRVCABLE` |
+| **1:20 – 2:05** | **Technical Decision: Full-Context XML vs. Chunked RAG** | Split screen: `system_prompt.md` & `brief_SRVCABLE.md` |
+| **2:05 – 2:35** | **Honest Limitation & Production Roadmap** | Codebase view: `agent.py` architecture |
+| **2:35 – 2:45** | **Wrap Up & Submission** | Face to camera / GitHub repository overview |
 
 ---
 
-## 🎬 Word-for-Word Script
+## 🎬 Word-for-Word Spoken Script
 
-### [0:00 – 0:30] Introduction & The Problem
-> *"Hi everyone, welcome! Today I’m walking you through our **Forensic Indian Equity Research Agent** built for Part B of the Super Investing AI Innovator Assignment.*
->
-> *When Indian retail investors research a company, they don’t just need a generic summary—they need a forensic filter. Real scraped research packs are messy: they contain media typos, promotional tips from unregistered Telegram channels, outdated governance data, and even malicious prompt injections.*
->
-> *Our goal was to build an agent that ingests raw, uncurated documents, neutralizes all 4 forensic traps, and delivers a rigorous, institutional-grade 1-page research brief anchored to **23 September 2026**."*
+### [0:00 – 0:35] The Engineering Challenge & Human Stakes
+*(Face to camera, or showing the clean research brief on screen)*
 
----
-
-### [0:30 – 1:15] Live Agent Execution & Forensic Traps
-*(Screen Share: Terminal running `python agent.py --ticker SRVCABLE --live`)*
-
-> *"Let’s run the agent live in the terminal using `python agent.py --ticker SRVCABLE`. Notice our pre-processor immediately kicks in.*
+> "Hi everyone. When we talk about building an AI research agent for Indian retail investors, the real challenge isn’t generating summaries—it’s **forensic defense**. 
 >
-> *First, it scans the 8 research documents. Notice this yellow security alert: the regex scanner caught an adversarial prompt injection in `multibaggeralerts_2026-08-12.md`—a hidden HTML comment attempting to force a 'STRONG BUY' and a ₹1,450 target. The agent automatically quarantines this file.*
+> In the Indian market, everyday investors are flooded with noise: WhatsApp tips, media typos, stale annual reports, and confusing corporate filings. If an AI blindly summarizes scraped text, it repeats bad numbers and costs people real money. 
 >
-> *Next, notice how it resolves the **₹1,428 crore** media figure from Business Daily versus the **₹1,248 crore** figure in the company’s official press release. Because we enforce a strict 5-tier statutory hierarchy, it crowns the official filing as ground truth and explains the media number as a digit transposition typo.*
->
-> *Finally, it avoids the entity confusion trap: it identifies that the ₹8 lakh municipal penalty in Nagpur was against 'Sarvottam Cable Network'—a local cable-TV operator owned by Suresh Patil—and completely excludes it from Mumbai-based Sarvottam Cables Ltd."*
+> So for this assignment, my focus wasn't just connecting an LLM to a prompt. I wanted to build an agent that behaves like a skeptical forensic analyst: one that cross-verifies legal disclosures, sanitizes prompt injections, translates corporate spin into plain English, and anchors everything strictly to **23 September 2026**."
 
 ---
 
-### [1:15 – 2:05] One Design Decision I’m Proud Of: Full-Context Sandboxing vs. Vector RAG
-*(Screen Share: Showing `brief_SRVCABLE.md` and `system_prompt.md`)*
+### [0:35 – 1:20] Live Execution & Neutralizing the 4 Traps
+*(Screen Share: Terminal running `python agent.py --ticker SRVCABLE`)*
 
-> *"The single design decision I’m most proud of is choosing **Deterministic Full-Context XML Sandboxing over Chunked Vector RAG**.*
+> "Let’s run the agent live: `python agent.py --ticker SRVCABLE`. 
 >
-> *In traditional RAG, vector databases chunk documents into 500-token pieces. But vector similarity is temporally blind and cannot perform cross-document contradiction detection. If you ask a vector RAG system about promoter pledges, it will pull the 2024 article showing a 35% pledge with high similarity, completely missing the 2026 shareholding pattern where pledges dropped to 4.1%.*
+> We’re running on **Gemini 2.5 Flash** via Google Cloud Vertex AI at a low `temperature=0.1` for deterministic reasoning.
 >
-> *By loading the entire corpus inside distinct XML `<document>` boundaries and passing it to Gemini 2.5 Flash at a low temperature of `0.1`, the model can see the entire timeline simultaneously. It recognized that the 35% pledge was superseded and resolved, reframing it as a positive deleveraging signal.*
+> Notice what happens immediately in Step 1. Our pre-processing security scanner flags `multibaggeralerts`: someone slipped a hidden HTML comment into the blog telling the AI to ignore all instructions and output a 'STRONG BUY' with a ₹1,450 target. We catch and quarantine it before it can hijack the context.
 >
-> *It also allowed us to benchmark financial materiality: when the company received a ₹46.3 crore GST notice, the agent calculated that this equals **56.5% of quarterly PAT**, cutting through management's PR spin."*
+> Next, look at how the agent resolves the financial conflict: *Business Daily* reported Q1 revenue as ₹1,428 crore, but the official company filing reported ₹1,248 crore. A retail investor reading that article would think sales jumped 35%. Our agent enforces a strict 5-tier statutory hierarchy: it anchors to the official regulatory filing as ground truth and flags the media number as a classic digit transposition error (`1428` vs `1248`).
+>
+> Finally, notice the entity disambiguation: the scraped pack had an article about an ₹8 lakh municipal penalty in Nagpur. A naive model would penalize Sarvottam Cables. Our agent inspects the entity metadata, realizes it’s an unrelated local cable TV operator named 'Sarvottam Cable Network' run by Suresh Patil, and keeps it out of the listed company's Bear Case."
 
 ---
 
-### [2:05 – 2:35] One Limitation & Future Improvement
-> *"Now, for one key limitation:*
+### [1:20 – 2:05] The Architectural Decision: Full-Context XML Sandboxing over Chunked RAG
+*(Screen Share: Highlighting `system_prompt.md` and Section 4 in `brief_SRVCABLE.md`)*
+
+> "The single architectural decision I'm most proud of is **choosing Full-Context XML Sandboxing over traditional Chunked Vector RAG**.
 >
-> *Our agent is strictly bounded by the research pack provided. While we implemented a bonus live NSE tool via `yfinance` to pull real-time prices, market cap, and P/E ratios for real stocks like Polycab, the agent cannot independently discover unfiled litigation or unannounced corporate actions unless an exchange announcement has been filed.*
+> The typical engineering instinct today is to immediately throw documents into an embedding model and vector database. But vector RAG is fundamentally broken for forensic finance for two reasons:
 >
-> *In a production rollout, I would integrate real-time MCA-21 court registry scrapers and direct SEBI/NSE API webhooks to make the document ingestion continuous and real-time."*
+> First, **vector similarity is temporally blind**. When asked about promoter pledging, vector search pulls the 2024 article showing a scary 35% pledge. It misses that the latest June 2026 exchange filing shows pledges dropped to 4.1%.
+>
+> Second, **vector search chunks documents in isolation**, making side-by-side contradiction detection nearly impossible.
+>
+> Because an equity research pack is usually under 50,000 words, feeding the entire unchunked corpus into Gemini's massive context window inside strict `<document>` XML tags allows the model to reason globally across the timeline. It recognized that the 35% pledge wasn't an active risk, but a positive deleveraging trend.
+>
+> More importantly, it enabled **materiality calculations for retail investors**: when management downplayed a ₹46.3 crore GST demand as 'having no material impact', the agent benchmarked it against quarterly PAT and flagged that it represents **56.5% of quarterly profits**—real-world clarity that protects everyday investors."
+
+---
+
+### [2:05 – 2:35] One Key Limitation & Production Mitigation
+*(Screen Share: Code structure in `agent.py`)*
+
+> "Now, being honest about limitations:
+>
+> The agent's intelligence is strictly bounded by the scraped documents provided. Even with our bonus live market feed via `yfinance` for real tickers like Polycab, the agent cannot independently verify unfiled civil litigation or unannounced corporate actions that haven't hit exchange feeds yet.
+>
+> In a production engineering rollout, I wouldn’t rely purely on static scraped folders. I’d integrate automated webhooks from the NSE/BSE corporate announcement feeds under Regulation 30, coupled with real-time MCA-21 registry indexing to make document ingestion continuous and verifiable."
 
 ---
 
 ### [2:35 – 2:45] Conclusion & Close
-> *"All artifacts—including `agent.py`, the system prompt, the 3-run test log, and the verified research brief—are committed in the repo.*
+*(Face to camera or showing the clean repo on GitHub)*
+
+> "All code—including the standalone `system_prompt.md`, the 3-run test log, the clean research briefs, and the minimal web dashboard—is open-source in the GitHub repository.
 >
-> *Thank you, and I look forward to your feedback!"*
+> Thanks for watching, and I look forward to your thoughts!"
+
+---
+
+## 💡 Practical Recording Tips for Delivery
+
+1. **Keep It Conversational:** Talk to the evaluator like a colleague across the desk. Use natural pauses when highlighting key numbers like `56.5% of PAT`.
+2. **Terminal Clarity:** Make your terminal font size readable (16–18pt) so the viewer can easily see the yellow security warning and the step-by-step pipeline.
+3. **Show, Don't Just Tell:** When mentioning the transposition typo or the GST percentage, briefly cursor-hover over that exact section in `brief_SRVCABLE.md`.
+4. **Time Check:** If you find yourself running over 3 minutes, trim the live command execution slightly and focus on the **XML vs. RAG rationale**—that is the highest-signal technical insight of the submission.
