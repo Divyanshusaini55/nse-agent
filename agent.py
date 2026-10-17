@@ -286,7 +286,7 @@ def main():
         "--project",
         type=str,
         default=os.environ.get("GCP_PROJECT", "resultintel"),
-        help="Google Cloud Project ID for Vertex AI (default: resultintel)"
+        help="Google Cloud Project ID for Vertex AI (default: $GCP_PROJECT)"
     )
     parser.add_argument(
         "--location",

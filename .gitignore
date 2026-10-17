@@ -11,7 +11,7 @@ venv/
 ENV/
 
 # Environment Variables & Credentials
-.env
+.env*
 *.key
 *.pem
 

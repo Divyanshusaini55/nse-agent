@@ -13,7 +13,7 @@ This project implements a **Forensic AI Equity Research Agent** that digests an 
 
 ## Infrastructure: Google Cloud Vertex AI
 
-- **GCP Project:** `resultintel`
+- **Platform:** Google Cloud Vertex AI
 - **Location:** `us-central1`
 - **Inference Model:** `gemini-2.5-flash`
 - **Sampling Temperature:** `0.1` (Deterministic, evidence-grounded inference)
@@ -82,8 +82,7 @@ In addition to trap avoidance, the agent prioritizes retail investor empowerment
 ├── web_app.py                      # Sleek, minimal light-theme visual dashboard
 ├── verify_pack.py                  # Automated test & integrity verification script
 ├── README.md                       # Project documentation & architecture overview
-├── requirements.txt                # Python dependencies
-└── .env.example                    # GCP Vertex AI configuration template
+└── requirements.txt                # Python dependencies
 ```
 
 ---
@@ -109,10 +108,10 @@ pip install -r requirements.txt
 # Authenticate with Google Cloud using Application Default Credentials
 gcloud auth application-default login
 
-# Set the active project to resultintel
-gcloud config set project resultintel
+# Set your active GCP project
+gcloud config set project <YOUR_GCP_PROJECT_ID>
 ```
-*(Optionally set environment variables in `.env`: `GCP_PROJECT=resultintel`, `GCP_LOCATION=us-central1`)*
+*(Optionally set environment variables in `.env`: `GCP_PROJECT=<YOUR_GCP_PROJECT_ID>`, `GCP_LOCATION=us-central1`)*
 
 ### 3. Run the Agent on Test Case (SRVCABLE)
 ```bash
